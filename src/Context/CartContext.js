@@ -41,10 +41,6 @@ const CartProvider = ({children}) => {
     setItems(filtered);
   }
 
-  // const findCartItem = (item_id) => {
-  //   return items.find((item) => item.id === item_id);
-  // }
-
   const values = {
     items,
     setItems,

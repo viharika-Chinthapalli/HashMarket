@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { useProduct } from "../../Context/ProductContext";
 import styles from "./styles.module.css";
 import Spinner from "../../Components/Spinner";
@@ -8,13 +8,12 @@ import { useFavorite } from '../../Context/FavoriteContext'
 import Card from "../../Components/Card";
 
 const Products = () => {
-  const {addToCart, items} = useCart()
-  const {addToFavorite, favoriteItems} = useFavorite()
+  const { addToCart, items } = useCart()
+  const { addToFavorite, favoriteItems } = useFavorite()
 
   const { productList, loading, setProductID, setCategory } = useProduct();
-  
-  const {category_id} = useParams()
 
+  const { category_id } = useParams()
 
   useEffect(() => {
     setCategory(category_id)
@@ -23,7 +22,7 @@ const Products = () => {
   return (
     <div className={styles.cardGroup}>
       {!loading ? (
-        productList.map((product) => {
+        productList.length > 0 ? productList.map((product) => {
           const findCartItem = items.find((item) => item.id === product.id);
           const findFavoriteItem = favoriteItems.find((item) => item.id === product.id);
           return (
@@ -36,7 +35,7 @@ const Products = () => {
               findFavoriteItem={Boolean(findFavoriteItem)}
             />
           );
-        })
+        }) : <p>No products available</p>
       ) : (
         <Spinner />
       )}
